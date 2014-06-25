@@ -8,7 +8,7 @@ require([
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
       renderer = new THREE.WebGLRenderer(),
       geometry = new THREE.BoxGeometry(200, 200, 200),
-      material = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('assets/img/crate.jpg') }),
+      material = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('assets/img/meat.jpg') }),
       cube = new THREE.Mesh(geometry, material),
       ambientLight = new THREE.AmbientLight(0xbbbbbb),
       directionalLight = new THREE.DirectionalLight(0xffffff);
