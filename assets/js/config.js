@@ -5,6 +5,7 @@ requirejs.config({
   },
   paths: {
     threeCore: 'lib/three',
-    jquery: 'lib/jquery-2.1.1.min'
+    jquery: 'lib/jquery-2.1.1.min',
+    camVideo: 'video'
   }
 });

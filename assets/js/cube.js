@@ -1,14 +1,30 @@
 require([
   'jquery',
-  'threeCore'
+  'threeCore',
+  'camVideo'
 ], function($) {
   'use strict';
+
+
+ // Decided not to append the video specific declarations to the below for readibility sake
+ var video = document.getElementById('monitor'),
+     videoImage = document.getElementById('videoImage'),
+     videoImageContext = videoImage.getContext('2d'),
+     videoTexture = new THREE.Texture( videoImage ),
+     movieMaterial;
+
+     videoImageContext.fillStyle = '#ffffff';
+     videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
+
+     videoTexture.minFilter = THREE.LinearFilter;
+     videoTexture.magFilter = THREE.LinearFilter;
+
 
   var scene = new THREE.Scene(),
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
       renderer = new THREE.WebGLRenderer(),
-      geometry = new THREE.BoxGeometry(200, 200, 200),
-      material = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('assets/img/meat.jpg') }),
+      geometry = new THREE.BoxGeometry(400, 400, 400),
+      material = new THREE.MeshLambertMaterial({ map: videoTexture }),
       cube = new THREE.Mesh(geometry, material),
       ambientLight = new THREE.AmbientLight(0xbbbbbb),
       directionalLight = new THREE.DirectionalLight(0xffffff);
@@ -25,13 +41,25 @@ require([
   $('body').append(renderer.domElement);
 
   function render() {
-    window.requestAnimationFrame(render);
 
-    cube.rotation.x += 0.1;
-    cube.rotation.y += 0.1;
+    if (video.readyState === video.HAVE_ENOUGH_DATA) {
+      videoImageContext.drawImage(video, 0, 0, videoImage.width, videoImage.height);
+
+      if (videoTexture) {
+        videoTexture.needsUpdate = true;
+      }
+    }
+
+    cube.rotation.x += 0.05;
+    cube.rotation.y += 0.05;
 
     renderer.render(scene, camera);
   }
 
-  render();
+  function animate() {
+    window.requestAnimationFrame(animate);
+    render();
+  }
+
+  animate();
 });
