@@ -23,7 +23,7 @@ require([
   var scene = new THREE.Scene(),
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
       renderer = new THREE.WebGLRenderer(),
-      geometry = new THREE.BoxGeometry(400, 400, 400),
+      geometry = new THREE.BoxGeometry(300, 300, 300),
       material = new THREE.MeshLambertMaterial({ map: videoTexture }),
       cube = new THREE.Mesh(geometry, material),
       ambientLight = new THREE.AmbientLight(0xbbbbbb),
@@ -50,8 +50,8 @@ require([
       }
     }
 
-    cube.rotation.x += 0.05;
-    cube.rotation.y += 0.05;
+    cube.rotation.x += 0.027;
+    cube.rotation.y += 0.027;
 
     renderer.render(scene, camera);
   }
